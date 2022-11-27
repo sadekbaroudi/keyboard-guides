@@ -99,7 +99,7 @@ You don't have to use inkscape, but I've found that inkscape is very reliable in
 
 If you already use Fusion 360, you may already have this enabled, but if you don't, it's really good to enable this before you get started. Otherwise, it will be hard to make adjustments later!
 
-![10-capture-design-history](images/10-capture-design-history)
+![10-capture-design-history](images/10-capture-design-history.png)
 
 ---
 
