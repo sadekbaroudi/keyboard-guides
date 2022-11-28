@@ -52,6 +52,8 @@ There are 5 considerations when looking at this particular PCB:
 4) The opening for the controller, trrs, reset switch  
 5) The EC11 encoders  
 
+(Optional) Also note that there are 4 mounting holes for the tenting puck, which I did not include in the screen shot.
+
 ![02-pcb-case-considerations.png](images/02-pcb-case-considerations.png)
 
 ---
@@ -71,6 +73,8 @@ There was no good layer to expose the mounting holes without exposing way too mu
 ![04-edit-footprint.png](images/04-edit-footprint.png)
 
 So, here we edit the footprint and add a circle centered around the mounting hole on the `User.Eco2` layer, since we're exporting that already. Do this for each of the mounting holes.
+
+(Optional) As noted earlier, you could follow the same process for the tenting puck mounting holes, and include them in the bottom plate. This would allow you to mount a tenting puck to the bottom plate of the case.
 
 ![05-update-footprint.png](images/05-update-footprint.png)
 ![06-save-footprint.png](images/06-save-footprint.png)
