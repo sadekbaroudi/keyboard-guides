@@ -4,7 +4,7 @@ This is a guide to easily calculate the precise numbers required to configure rg
 
 ## Extracting the values
 
-First and foremost, let's collect all the appropriate values for the x/y coordinates of the leds.
+First and foremost, let's collect all the appropriate values for the x and y coordinates of the leds.
 
 The first step is to get the absolute positions of the LEDs. Kicad, thankfully, has built-in functionality to export the positions of all parts on the board, and here's how to access it.
 
@@ -12,7 +12,7 @@ The first step is to get the absolute positions of the LEDs. Kicad, thankfully, 
 
 -------------------------------------
 
-The default values are fine, as you'll only use the file to calculate the relative position of each LED. To make it easier to find, input 'POS' or your own choice of folder name into the Output directory field.
+Leave the selections in the popup as they are, as you'll only use the file to calculate the relative position of each LED. To make it easier to find, you can input `POS` or your own choice of folder name into the `Output directory` field.
 
 ![POS fields](Images/02-POS_fields.png)
 
@@ -26,7 +26,7 @@ Once you have the pos file generated, open it up. You should see a list of all t
 
 ## The spreadsheet
 
-Delete everything from the list that isn't an RGB LED. Hopefully, the footprint you've used for them will have the name of the RGB LED.
+Delete everything from the list that isn't an RGB LED. Hopefully, the footprint you've used for them will have a part number that's easily recognizable.
 
 Once you've deleted the extra components, you no longer need the Val, Package, Rot or Side columns so get rid of those too.
 
@@ -46,11 +46,11 @@ Next, create the following columns. Feel free to name them something else as lon
 
 `CalX`: The relative X value translated to the QMK X position of the LED.
 
-`CalY`: The relative X value translated to the QMK X position of the LED.
+`CalY`: The relative Y value translated to the QMK Y position of the LED.
 
 ![ABS spreadsheet](Images/04-ABS_spreadsheet.png)
 
-> Note: The LED references aren't necessarily going to be in numerical order, as they're ordered in the info.json file by how they're connected electrically. This is why the `LED order` column is required. Refer to your schematic to double-check that the LEDs are ordered correctly!
+> Note: The LED references aren't necessarily going to be in numerical order, as they're ordered in the info.json file by how they're connected electrically. This is why you need the `LED order` column. Refer to your schematic to double-check that the LEDs are ordered correctly!
 
 ![Honeydew RGB schematic](Images/05-Honeydew_RGB_Schem.png)
 
@@ -62,7 +62,7 @@ For the `RelX` column, use the following formula.
 
 `= (ABSX) - MIN (ABSX values)`, which when translated to excel in the example, becomes `=C2-MIN($C$2:$C$65)`.
 
-The range of values in the `MIN` function reference the `ABSX` column. You need to use dollar signs in order to keep the referenced cells the same when copying across cells. 
+The range of values in the `MIN($C$2:$C$65)` function reference the `ABSX` column. You need to use the `$` signs in order to keep the referenced cells the same when copying across cells. 
 
 ![RelX](Images/06-RelX.png)
 
@@ -80,7 +80,7 @@ QMK has a recommended maximum X value of `224`, and a Y value of `64`. In order 
 
 `(CalX) = ROUND[(RelX) / MAX (RelX values) * 224, 0]`, which when translated to excel in the example, becomes `=ROUND(E14/MAX($E$2:$E$65)*224,0)`
 
-`(CalY) = ROUND[(RelY) / MAX (RelY values) * 224, 0]`, which when translated to excel in the example, becomes `=ROUND(F22/MAX($F$2:$F$65)*64,0)`
+`(CalY) = ROUND[(RelY) / MAX (RelY values) * 64, 0]`, which when translated to excel in the example, becomes `=ROUND(F22/MAX($F$2:$F$65)*64,0)`
 
 As you did above, use $ signs when referencing the range of values in the `RelX` and `RelY` columns.
 
@@ -106,7 +106,7 @@ In the above example,
 |`LED_FLAG_KEYLIGHT`         |`4`   |If the LED is for key backlight             |
 |`LED_FLAG_INDICATOR`        |`8`   |If the LED is for keyboard state indication |
 
-`"matrix": [0, 0]` defines the position relative to the key the LED it's under, if the flag is 1 or 4. If the flag is 2 or 8, omit this field.
+`"matrix": [0, 0]` if the flag is 1 or 4, this defines the position of the LED relative to the key it's under. If the flag is 2 or 8, omit this field.
 
 `"x": 14, "y": 0 ` defines the physical position of the LED. This is where you want to input your previously calculated `CalX` and `CalY` values.
 
@@ -187,7 +187,7 @@ The following is the RGB matrix configuration for the example PCB above.
 
 > Note: This step is optional, you only need to follow this if you have a specific spot you want the center of your matrix to go.
 
-The default center of the keyboard is expected to be `{ 112, 32 }`, but this can be changed if you want. To calculate this easily, find the absolute point on the PCB where you want to center to go, then treat it as another LED and input it into the spreadsheet, allowing it to perform the calculations as normal.
+The default center of the keyboard in QMK is `{ 112, 32 }`, but this can be changed if you want. To calculate this easily, find the absolute point on the PCB where you want to center to go, then treat it as another LED and input it into the spreadsheet, performing the calculations as normal.
 
 ![Matrix center](Images/10-Matrix_Center.png)
 ![Spreadsheet center](Images/11-Spreadsheet_Center.png)
@@ -198,5 +198,6 @@ That's all there is to it! You have now configured your per key rgb to generate 
 
 ## Change Log
 
-* Ariamelon - Aug 7th, 2023 - Updated guide to be more automated using CPL file
+* [Aria](https://github.com/ariamelon/) - Aug 8th, 2023 - Fixed typos, clarified wording and 05 schematic image
+* [Aria](https://github.com/ariamelon/) - Aug 7th, 2023 - Updated guide to be more automated using CPL file and updated it to fit current info.json formatting
 * Sadek Baroudi - Jan 8th, 2023 - Original guide
