@@ -195,3 +195,8 @@ The default center of the keyboard is expected to be `{ 112, 32 }`, but this can
 ## The end
 
 That's all there is to it! You have now configured your per key rgb to generate perfect effects. Reference files are also included in this repository, in case you want to look at the examples referenced in this guide.
+
+## Change Log
+
+* Ariamelon - Aug 7th, 2023 - Updated guide to be more automated using CPL file
+* Sadek Baroudi - Jan 8th, 2023 - Original guide
