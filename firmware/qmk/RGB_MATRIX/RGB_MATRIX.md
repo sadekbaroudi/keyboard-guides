@@ -198,5 +198,6 @@ That's all there is to it! You have now configured your per key rgb to generate 
 
 ## Change Log
 
+* [Aria](https://github.com/ariamelon/) - Aug 8th, 2023 - Fixed typos, clarified wording and 05 schematic image
 * [Aria](https://github.com/ariamelon/) - Aug 7th, 2023 - Updated guide to be more automated using CPL file and updated it to fit current info.json formatting
 * Sadek Baroudi - Jan 8th, 2023 - Original guide
