@@ -1,10 +1,10 @@
 # QMK RGB Matrix configuration
 
-This is a guide to easily calculate the precise numbers required to configure rgb matrix in a way that ensures that the effects are rendered perfectly on your keyboard, no matter the shape, size, key orientation, etc...
+This is a guide to easily calculate the precise numbers required to configure RGB matrix in a way that ensures that the effects are rendered perfectly on your keyboard, no matter the shape, size, key orientation, etc...
 
 ## Extracting the values
 
-First and foremost, let's collect all the appropriate values for the x and y coordinates of the leds.
+First and foremost, let's collect all the appropriate values for the x and y coordinates of the LEDs.
 
 The first step is to get the absolute positions of the LEDs. Kicad, thankfully, has built-in functionality to export the positions of all parts on the board, and here's how to access it.
 
@@ -20,7 +20,7 @@ Leave the selections in the popup as they are, as you'll only use the file to ca
 
 Once you have the pos file generated, open it up. You should see a list of all the parts ordered by the component reference.
 
-> Note: If you want to save the calculations in the excel spreadsheet, don't forget to save it as an excel file instead of a CSV!
+> Note: If you want to save the calculations in the Excel spreadsheet, don't forget to save it as an Excel file instead of a CSV!
 
 ![Raw spreadsheet](Images/03-Raw_spreadsheet.png)
 
@@ -28,15 +28,15 @@ Once you have the pos file generated, open it up. You should see a list of all t
 
 Delete everything from the list that isn't an RGB LED. Hopefully, the footprint you've used for them will have a part number that's easily recognizable.
 
-Once you've deleted the extra components, you no longer need the Val, Package, Rot or Side columns so get rid of those too.
+Once you've deleted the extra components, you no longer need the Val, Package, Rot, or Side columns so get rid of those too.
 
 Next, create the following columns. Feel free to name them something else as long as you know what each column is for.
 
-`LED ref`: The reference number of each LED. Rename the `Ref` column to this. 
+`LED ref`: The reference number of each LED. Rename the `Ref` column to this.
 
-`LED order`: The actual electrical order of each LED. 
+`LED order`: The actual electrical order of each LED.
 
-`ABSX`: The absolute X position of the LED on the PCB. Rename the `PosX` column to this. 
+`ABSX`: The absolute X position of the LED on the PCB. Rename the `PosX` column to this.
 
 `ABSY`: The absolute Y position of the LED on the PCB. Rename the `PosY` column to this.
 
@@ -56,19 +56,19 @@ Next, create the following columns. Feel free to name them something else as lon
 
 -------------------------------------
 
-Now to fill in the `RelX` and `RelY` columns.
+Now fill in the `RelX` and `RelY` columns.
 
 For the `RelX` column, use the following formula.
 
-`= (ABSX) - MIN (ABSX values)`, which when translated to excel in the example, becomes `=C2-MIN($C$2:$C$65)`.
+`= (ABSX) - MIN (ABSX values)`, which when translated to Excel in the example, becomes `=C2-MIN($C$2:$C$65)`.
 
-The range of values in the `MIN($C$2:$C$65)` function reference the `ABSX` column. You need to use the `$` signs in order to keep the referenced cells the same when copying across cells. 
+The range of values in the `MIN($C$2:$C$65)` function references the `ABSX` column. You need to use the `$` signs in order to keep the referenced cells the same when copying across cells.
 
 ![RelX](Images/06-RelX.png)
 
 For the `RelY` column, use the following formula.
 
-`= MAX (ABSY values) - (ABSY)`, which when translated to excel in the example, becomes `=MAX($D$2:$D$65)-D9`.
+`= MAX (ABSY values) - (ABSY)`, which when translated to Excel in the example, becomes `=MAX($D$2:$D$65)-D9`.
 
 > Note: If your Kicad Y coordinates increase as you go down the screen, use `= (ABSY) - MIN (ABSY values)` instead.
 
@@ -78,9 +78,9 @@ For the `RelY` column, use the following formula.
 
 QMK has a recommended maximum X value of `224`, and a Y value of `64`. In order to translate the relative values to the QMK values, you need to use the following formulae.
 
-`(CalX) = ROUND[(RelX) / MAX (RelX values) * 224, 0]`, which when translated to excel in the example, becomes `=ROUND(E14/MAX($E$2:$E$65)*224,0)`
+`(CalX) = ROUND[(RelX) / MAX (RelX values) * 224, 0]`, which when translated to Excel in the example, becomes `=ROUND(E14/MAX($E$2:$E$65)*224,0)`
 
-`(CalY) = ROUND[(RelY) / MAX (RelY values) * 64, 0]`, which when translated to excel in the example, becomes `=ROUND(F22/MAX($F$2:$F$65)*64,0)`
+`(CalY) = ROUND[(RelY) / MAX (RelY values) * 64, 0]`, which when translated to Excel in the example, becomes `=ROUND(F22/MAX($F$2:$F$65)*64,0)`
 
 As you did above, use $ signs when referencing the range of values in the `RelX` and `RelY` columns.
 
@@ -89,7 +89,7 @@ As you did above, use $ signs when referencing the range of values in the `RelX`
 
 ## QMK configuration
 
-With the info in the spreadsheet, you have everything you need to populate the rgb matrix in your info.json file.
+With the info in the spreadsheet, you have everything you need to populate the RGB matrix in your info.json file.
 
 Each entry has the following format:
 
@@ -194,10 +194,10 @@ The default center of the keyboard in QMK is `{ 112, 32 }`, but this can be chan
 
 ## The end
 
-That's all there is to it! You have now configured your per key rgb to generate perfect effects. Reference files are also included in this repository, in case you want to look at the examples referenced in this guide.
+That's all there is to it! You have now configured your per key RGB to generate perfect effects. Reference files are also included in this repository, in case you want to look at the examples referenced in this guide.
 
 ## Change Log
 
-* [Aria](https://github.com/ariamelon/) - Aug 8th, 2023 - Fixed typos, clarified wording and 05 schematic image
+* [Aria](https://github.com/ariamelon/) - Aug 8th, 2023 - Fixed typos, clarified wording, and 05 schematic image
 * [Aria](https://github.com/ariamelon/) - Aug 7th, 2023 - Updated guide to be more automated using CPL file and updated it to fit current info.json formatting
 * Sadek Baroudi - Jan 8th, 2023 - Original guide

@@ -2,15 +2,15 @@
 
 ## Overview
 
-In this guide, I'll be providing an detailed walkthrough of how I design 3D models for cases, with the intent of 3D printing them. This starts with a completed keyboard pcb from the kicad files, and ends with a fusion 360 model that you can export as an stl/3mf for 3D printing. For this guide, I'll be using the chocolad as an example. As of writing this sentence, I haven't designed the case yet!
+In this guide, I'll be providing a detailed walkthrough of how I design 3D models for cases, with the intent of 3D printing them. This starts with a completed keyboard PCB from the Kicad files and ends with a Fusion 360 model that you can export as an STL/3mf for 3D printing. For this guide, I'll be using the Chocolad as an example. As of writing this sentence, I haven't designed the case yet!
 
 https://github.com/jimmerricks/chocolad
 
 ## Prerequisites
 
-* You have a basic understanding of kicad
-* You have inkscape installed (only used to convert svg to dxf in a way that fusion 360 can consume)
-* You have fusion 360 installed
+* You have a basic understanding of Kicad
+* You have Inkscape installed (only used to convert SVG to DXF in a way that Fusion 360 can consume)
+* You have Fusion 360 installed
 
 ## Follow along
 
@@ -37,7 +37,7 @@ Kicad is a perfect place to start, as it provides you with exact dimensions to c
 
 ### PCB footprints
 
-So, let's first look at the pcb to make sure it has everything we need to consider when doing the initial sketch for the case. You'll want to hide the copper layers so you can clearly see the pcb and footprints to identify what you care about for the case.
+So, let's first look at the PCB to make sure it has everything we need to consider when doing the initial sketch for the case. You'll want to hide the copper layers so you can clearly see the PCB and footprints to identify what you care about for the case.
 
 ![01-pcb-footprints.png](images/01-pcb-footprints.png)
 
@@ -45,14 +45,14 @@ So, let's first look at the pcb to make sure it has everything we need to consid
 
 ### Case considerations
 
-There are 5 considerations when looking at this particular PCB:  
-1) The keyswitch cutouts  
-2) The edge cuts of the pcb  
-3) The mounting holes for the M2 standoffs  
-4) The opening for the controller, trrs, reset switch  
-5) The EC11 encoders  
+There are 5 considerations when looking at this particular PCB:
+1) The keyswitch cutouts
+2) The edge cuts of the PCB
+3) The mounting holes for the M2 standoffs
+4) The opening for the controller, TRRS, reset switch
+5) The EC11 encoders
 
-(Optional) Also note that there are 4 mounting holes for the tenting puck, which I did not include in the screen shot.
+(Optional) Also note that there are 4 mounting holes for the tenting puck, which I did not include in the screenshot.
 
 ![02-pcb-case-considerations.png](images/02-pcb-case-considerations.png)
 
@@ -60,19 +60,19 @@ There are 5 considerations when looking at this particular PCB:
 
 ### Deselect layers
 
-At this point, you want to deselect layers until you have everything you need, while keeping as little showing as possible otherwise. In this case, `User.Eco2`, `Edge.Cuts`, and `F.Courtyard` leaves us with almost everything. The only thing missing is the mounting holes.
+At this point, you want to deselect layers until you have everything you need while keeping as little showing as possible otherwise. In this case, `User.Eco2`, `Edge.Cuts`, and `F.Courtyard` leave us with almost everything. The only thing missing is the mounting holes.
 
 ![03-deselect-layers.png](images/03-deselect-layers.png)
 
 ---
 
-### Update footprints 
+### Update footprints
 
-There was no good layer to expose the mounting holes without exposing way too much from the pcb. It's important not to expose to much, because we'll be exporting this as an SVG. By leaving too much, you have to do a lot more cleanup in SVG later. This is a tedious process, so let's add some drawings to the mounting hole footprints using one of the layers that we've identified in a previous step.
+There was no good layer to expose the mounting holes without exposing way too much from the PCB. It's important not to expose too much, because we'll be exporting this as an SVG. By leaving too much, you have to do a lot more cleanup in SVG later. This is a tedious process, so let's add some drawings to the mounting hole footprints using one of the layers that we've identified in a previous step.
 
 ![04-edit-footprint.png](images/04-edit-footprint.png)
 
-So, here we edit the footprint and add a circle centered around the mounting hole on the `User.Eco2` layer, since we're exporting that already. Do this for each of the mounting holes.
+So, here we edit the footprint and add a circle centered around the mounting hole on the `User.Eco2` layer since we're exporting that already. Do this for each of the mounting holes.
 
 (Optional) As noted earlier, you could follow the same process for the tenting puck mounting holes, and include them in the bottom plate. This would allow you to mount a tenting puck to the bottom plate of the case.
 
@@ -93,7 +93,7 @@ Now, we export an SVG and include only the layers we identified earlier.
 
 ### Save as DXF
 
-You don't have to use inkscape, but I've found that inkscape is very reliable in giving us a usable DXF file for Fusion 360. Use the R14 format, and make sure it's set to mm as the unit.
+You don't have to use Inkscape, but I've found that Inkscape is very reliable in giving us a usable DXF file for Fusion 360. Use the R14 format, and make sure it's set to mm as the unit.
 
 ![09-save-as-dxf.png](images/09-save-as-dxf.png)
 
@@ -117,13 +117,13 @@ Now we go into Fusion 360 and import the DXF we just saved from Inkscape.
 
 ### Check switch hole size
 
-Check the size of the switch holes. For choc switches, they should be 13.95mm. For MX switches, 14mm works great. If you are doing this for a pcb that supports both choc and MX, 14mm is fine. It feels a bit loose for choc switches, but it'll still work fine.
+Check the size of the switch holes. For choc switches, they should be 13.95mm. For MX switches, 14mm works great. If you are doing this for a PCB that supports both choc and MX, 14mm is fine. It feels a bit loose for choc switches, but it'll still work fine.
 
 ![11-switch-hole-too-small.png](images/11-switch-hole-too-small.png)
 
 ---
 
-### Adjust switch holes size
+### Adjust switch hole size
 
 If they are not correct, select all the switch holes, and offset them by whatever distance you need to make them 13.95mm or 14mm.
 
@@ -168,7 +168,7 @@ Now that you have a point, draw a center circle around that point, with a diamet
 
 ### Case outline offsets
 
-At this point, we want to select the perimeter of the case, and offset it by about 1mm. If you don't do this, the pcb may not fit in the case, as you want to leave room for error from the PCB manufacturing process.
+At this point, we want to select the perimeter of the case, and offset it by about 1mm. If you don't do this, the PCB may not fit in the case, as you want to leave room for error from the PCB manufacturing process.
 
 ![20-offset-pcb-inner-wall.png](images/20-offset-pcb-inner-wall.png)
 
@@ -209,7 +209,7 @@ I usually like to add some texture to the outline, but this is a stylistic prefe
 
 ### Adjust for other components (measure and draw)
 
-So, admittedly, I forgot to account for the depth of the trrs cable in the case. That said, this actually serves as a great example to illustrate how to solve for it. I measure from a known point on the pcb outline, and look at the Y values (in this case). I check to the bottom edge of the TRRS port, and the top edge of the TRRS port. Then I offset by a couple of mm or so to make sure there is enough clearance for the TRRS cable end.
+So, admittedly, I forgot to account for the depth of the TRRS cable in the case. That said, this actually serves as a great example to illustrate how to solve it. I measure from a known point on the PCB outline, and look at the Y values (in this case). I check the bottom edge of the TRRS port, and the top edge of the TRRS port. Then I offset by a couple of mm or so to make sure there is enough clearance for the TRRS cable end.
 
 ![26-trrs-measure-part1.png](images/26-trrs-measure-part1.png)
 ![27-trrs-measure-part2.png](images/27-trrs-measure-part2.png)
@@ -228,7 +228,7 @@ Now that we have drawn the lines and created a region to extrude, we extrude dow
 
 ### Create the bottom plate sketch
 
-Last step is to create the bottom plate, which you will use to screw in to the body using the mounting holes. This part is very easy! You go back and edit the original sketch. Then you copy the border of the case and the mounting holes.
+The last step is to create the bottom plate, which you will use to screw into the body using the mounting holes. This part is very easy! You go back and edit the original sketch. Then you copy the border of the case and the mounting holes.
 
 ![31-copy-bottom-plate-sketch-part1.png](images/31-copy-bottom-plate-sketch-part1.png)
 ![32-copy-bottom-plate-sketch-part2.png](images/32-copy-bottom-plate-sketch-part2.png)
@@ -237,7 +237,7 @@ Last step is to create the bottom plate, which you will use to screw in to the b
 
 ### Extrude the bottom plate
 
-Once you have the plate sketch, you extrude by whatever thickness you like (2mm is a very good sweet spot, but I sometimes do 1.6 for a slighly lower profile keyboard)
+Once you have the plate sketch, you extrude by whatever thickness you like (2mm is a very good sweet spot, but I sometimes do 1.6 for a slightly lower profile keyboard)
 
 ![33-extrude-bottom-plate.png](images/33-extrude-bottom-plate.png)
 
@@ -245,7 +245,7 @@ Once you have the plate sketch, you extrude by whatever thickness you like (2mm 
 
 ### Chamfer mounting holes (optional)
 
-If you are using countersunk screws, you can optionally decide to chamfer the mounting to help accommodate that. It helps to create a flush bottom plate. I generally consider this unnecessary, since you will usually use bump ons, which protrude farther than M2 screw heads. But if you'd like to experiment with this, see the images below as an example. The example is using a 1.6mm bottom plate, which I generally wouldn't recommend if doing this. I'd suggest using at least a 2mm thickness bottom plate.
+If you are using countersunk screws, you can optionally decide to chamfer the mounting to help accommodate that. It helps to create a flush bottom plate. I generally consider this unnecessary, since you will usually use bump-ons, which protrude farther than M2 screw heads. But if you'd like to experiment with this, see the images below as an example. The example is using a 1.6mm bottom plate, which I generally wouldn't recommend if doing this. I'd suggest using at least a 2mm thickness bottom plate.
 
 ![34-chamfer-mounting-holes-part1.png](images/34-chamfer-mounting-holes-part1.png)
 ![34-chamfer-mounting-holes-part1.png](images/34-chamfer-mounting-holes-part2.png)
@@ -254,7 +254,7 @@ If you are using countersunk screws, you can optionally decide to chamfer the mo
 
 ### Complete case
 
-You are done! Export this as an stl, print it, and do a test fit. If you need to make adjustments, you already know all the steps above. Go back into Fusion 360 and edit using the timeline.
+You are done! Export this as an STL, print it, and do a test fit. If you need to make adjustments, you already know all the steps above. Go back into Fusion 360 and edit using the timeline.
 
 ![34-completed-case-part1.png](images/34-completed-case-part1.png)
 ![35-completed-case-part2.png](images/35-completed-case-part2.png)
