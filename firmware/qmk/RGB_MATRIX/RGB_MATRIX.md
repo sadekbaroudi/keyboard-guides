@@ -106,7 +106,7 @@ In the above example,
 |`LED_FLAG_KEYLIGHT`         |`4`   |If the LED is for key backlight             |
 |`LED_FLAG_INDICATOR`        |`8`   |If the LED is for keyboard state indication |
 
-`"matrix": [0, 0]` if the flag is 1 or 4, this defines the position of the LED relative to the key it's under. If the flag is 2 or 8, omit this field.
+`"matrix": [0, 0]` if the flag is 1 or 4, this defines the position of the LED relative to the key it's under. If the flag is 2 or 8, omit this field. You shoud note this is ordered Row, Column.
 
 `"x": 14, "y": 0 ` defines the physical position of the LED. This is where you want to input your previously calculated `CalX` and `CalY` values.
 
